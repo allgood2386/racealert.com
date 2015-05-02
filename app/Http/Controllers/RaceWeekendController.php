@@ -2,6 +2,7 @@
 
 use App\Http\Requests\RaceWeekendRequest;
 use App\RaceWeekend;
+use App\Race;
 
 /**
  * Class RaceWeekendController

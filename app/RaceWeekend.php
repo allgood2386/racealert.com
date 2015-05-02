@@ -10,7 +10,11 @@ class RaceWeekend extends Model {
     ];
 
     public function raceSeries() {
-        $this->belongsToMany('App\RaceSeries');
+        $this->belongsTo('App\RaceSeries');
+    }
+
+    public function races() {
+        return $this->hasMany('App\Race');
     }
 
 

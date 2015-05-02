@@ -15,8 +15,12 @@
     {!! Form::input('date', 'finish', date('Y-m-d H:i'), ['class' => 'form-control']) !!}
 </div>
 <div class="form-group">
+    {!! Form::label('race_series_id', 'Race Weekend:') !!}
+    {!! Form::select('race_series_id', $raceWeekends, null, ['class' => 'form-control']) !!}
+</div>
+<div class="form-group">
     {!! Form::label('type_list', 'Race Type:') !!}
-    {!! Form::input('type_list[]', $types, null, ['id' => 'type', 'class' => 'form-control']) !!}
+    {!! Form::select('type_list[]', $types, null, ['id' => 'type', 'class' => 'form-control']) !!}
 </div>
 <div class="form-group">
     {!! Form::submit($submitButtonText, ['class' => 'btn btn-primary form-control']) !!}

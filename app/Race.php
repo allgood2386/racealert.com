@@ -12,4 +12,7 @@ class Race extends Model {
         return $this->belongsToMany('App\RaceType')->withTimestamps();
     }
 
+    public function raceWeekend() {
+        return $this->belongsTo('All\RaceWeekend');
+    }
 }

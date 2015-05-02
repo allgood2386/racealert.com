@@ -19,7 +19,7 @@ class CreateRaceTypesTable extends Migration {
             $table->string('type');
 		});
 
-        Schema::create('race_type_race', function(Blueprint $table){
+        Schema::create('race_race_type', function(Blueprint $table){
             $table->integer('race_id')->unsigned()->index();
             $table->foreign('race_id')->references('id')->on('races');
 

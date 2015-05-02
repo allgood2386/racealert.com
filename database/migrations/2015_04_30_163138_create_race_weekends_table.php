@@ -21,20 +21,6 @@ class CreateRaceWeekendsTable extends Migration {
             $table->timestamp('start');
             $table->timestamp('finish');
 		});
-
-        /*
-        Schema::create('raceseries_raceweekend', function(Blueprint $table)
-        {
-
-            $table->integer('raceweekend_id')->unsigned()->index();
-            $table->foreign('raceweekend_id')->references('id')->on('raceweekend');
-
-            $table->integer('raceseries_id')->unsigned()->index();
-            $table->foreign('raceseries_id')->references('id')->on('raceseries');
-
-            $table->timestamps();
-        });
-        */
 	}
 
 	/**

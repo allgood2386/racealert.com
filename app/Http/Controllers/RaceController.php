@@ -3,6 +3,7 @@
 use App\Http\Requests\RaceRequest;
 use App\Race;
 use App\RaceType;
+use App\RaceWeekend;
 
 class RaceController extends Controller {
 
@@ -26,7 +27,8 @@ class RaceController extends Controller {
 	public function create()
 	{
         $types = RaceType::lists('type', 'id');
-		return view('races.create', compact('options', 'types'));
+        $raceWeekends = RaceWeekend::lists('event_name', 'id');
+		return view('races.create', compact('types', 'raceWeekends'));
 	}
 
 	/**
@@ -37,8 +39,7 @@ class RaceController extends Controller {
 	public function store(RaceRequest $request)
 	{
 		$race = Race::create($request->all());
-
-        $this->syncTags($race, $request->input('type_list'));
+        $this->syncTypes($race, $request->input('type_list'));
 
         return redirect('race');
 	}
@@ -76,7 +77,7 @@ class RaceController extends Controller {
 	{
 		$race->update($request->all());
 
-        $this->syncTags($race, $request->input('type_list'));
+        $this->syncTypes($race, $request->input('type_list'));
 
         return redirect('race');
 	}
@@ -91,5 +92,10 @@ class RaceController extends Controller {
 	{
 		//
 	}
+
+    private function syncTypes(Race $race, array $types)
+    {
+        $race->raceTypes()->sync($types);
+    }
 
 }
