@@ -5,7 +5,7 @@ use Illuminate\Database\Eloquent\Model;
 class Race extends Model {
 
     protected $fillable = [
-      'name', 'body', 'start', 'finish', 'type'
+      'name', 'body', 'start', 'finish', 'type', 'race_weekend_id',
     ];
 
     public function raceTypes() {
@@ -13,6 +13,6 @@ class Race extends Model {
     }
 
     public function raceWeekend() {
-        return $this->belongsTo('All\RaceWeekend');
+        return $this->belongsTo('App\RaceWeekend');
     }
 }

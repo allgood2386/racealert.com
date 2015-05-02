@@ -1,8 +1,8 @@
 <?php namespace App\Http\Controllers;
 
 use App\Http\Requests\RaceWeekendRequest;
+use App\RaceSeries;
 use App\RaceWeekend;
-use App\Race;
 
 /**
  * Class RaceWeekendController
@@ -29,7 +29,8 @@ class RaceWeekendController extends Controller {
 	 */
 	public function create()
 	{
-		return view('raceweekends.create');
+        $raceSeries = RaceSeries::lists('name', 'id');
+		return view('raceweekends.create', compact('raceSeries'));
 	}
 
     /**
@@ -65,7 +66,8 @@ class RaceWeekendController extends Controller {
      */
     public function edit(RaceWeekend $raceWeekend)
     {
-        return view('raceweekends.edit', compact('raceWeekend'));
+        $raceSeries = RaceSeries::lists('name', 'id');
+        return view('raceweekends.edit', compact('raceWeekend', 'raceSeries'));
     }
 
 	/**

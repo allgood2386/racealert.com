@@ -6,11 +6,11 @@ use Carbon\Carbon;
 class RaceWeekend extends Model {
 
 	protected $fillable = [
-      'event_name', 'body', 'start', 'finish',
+      'event_name', 'body', 'start', 'finish', 'race_series_id',
     ];
 
     public function raceSeries() {
-        $this->belongsTo('App\RaceSeries');
+        return $this->belongsTo('App\RaceSeries');
     }
 
     public function races() {

@@ -15,11 +15,16 @@ class CreateRaceWeekendsTable extends Migration {
 		Schema::create('race_weekends', function(Blueprint $table)
 		{
 			$table->increments('id');
+            $table->integer('race_series_id')->unsigned();
 			$table->timestamps();
             $table->string('event_name');
             $table->text('body');
             $table->timestamp('start');
             $table->timestamp('finish');
+
+            $table->foreign('race_series_id')
+                ->references('id')
+                ->on('race_series');
 		});
 	}
 

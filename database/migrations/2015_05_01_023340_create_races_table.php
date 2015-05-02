@@ -15,14 +15,14 @@ class CreateRacesTable extends Migration {
 		Schema::create('races', function(Blueprint $table)
 		{
 			$table->increments('id');
-            $table->integer('race_series_id')->unsigned();
+            $table->integer('race_weekend_id')->unsigned();
 			$table->timestamps();
             $table->text('name');
             $table->text('body');
             $table->timestamp('start');
             $table->timestamp('finish');
 
-            $table->foreign('race_series_id')
+            $table->foreign('race_weekend_id')
                 ->references('id')
                 ->on('race_weekends');
 		});
