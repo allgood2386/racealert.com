@@ -13,4 +13,11 @@ class Race extends Model
   public function event() {
     return $this->belongsTo(RaceEvent::class);
   }
+  
+  public function track() {
+    return $this->hasOne(Track::class);
+  }
+  public function trackConfiguration() {
+    return $this->hasOne(TrackConfiguration::class);
+  }
 }

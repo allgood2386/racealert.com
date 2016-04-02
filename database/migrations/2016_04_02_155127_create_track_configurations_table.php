@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateRaceEventsTable extends Migration
+class CreateTrackConfigurationsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,14 +12,12 @@ class CreateRaceEventsTable extends Migration
      */
     public function up()
     {
-        Schema::create('race_events', function (Blueprint $table) {
+        Schema::create('track_configurations', function (Blueprint $table) {
             $table->increments('id');
             $table->timestamps();
+            $table->integer('track_id', FALSE, TRUE);
             $table->string('name');
-            $table->dateTime('start');
-            $table->dateTime('end');
             $table->longText('description');
-            $table->integer('track_id', FALSE, TRUE)->index();
         });
     }
 
@@ -30,6 +28,6 @@ class CreateRaceEventsTable extends Migration
      */
     public function down()
     {
-        Schema::drop('race_events');
+        Schema::drop('track_configurations');
     }
 }

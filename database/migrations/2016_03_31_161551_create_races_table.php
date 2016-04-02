@@ -20,6 +20,8 @@ class CreateRacesTable extends Migration
             $table->dateTime('end');
             $table->longText('description');
             $table->integer('race_event_id', FALSE, TRUE)->index();
+            $table->integer('track_id', FALSE, TRUE)->index();
+            $table->integer('track_configuration_id', FALSE, TRUE)->index();
         });
     }
 

@@ -13,4 +13,8 @@ class RaceEvent extends Model
   public function races() {
     return $this->hasMany(Race::class);
   }
+  
+  public function track() {
+    return $this->hasOne(Track::class);
+  }
 }
