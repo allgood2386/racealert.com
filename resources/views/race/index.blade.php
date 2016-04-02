@@ -5,7 +5,7 @@
 <div>
     <ul>
         @foreach($races as $race)
-            <li><a href="{{ $race->id }}" >{{ $race->name }}</a></li>
+            <li><a href="races/{{ $race->id }}" >{{ $race->name }}</a></li>
         @endforeach
     </ul>
 </div>

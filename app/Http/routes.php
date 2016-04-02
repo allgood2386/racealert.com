@@ -20,3 +20,4 @@ Route::auth();
 Route::get('/home', 'HomeController@index');
 
 Route::resource('races', 'RaceController');
+Route::resource('events', 'RaceEventController');

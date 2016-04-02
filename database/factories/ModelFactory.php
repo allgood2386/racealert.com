@@ -19,3 +19,23 @@ $factory->define(App\User::class, function (Faker\Generator $faker) {
         'remember_token' => str_random(10),
     ];
 });
+$factory->define(App\RaceEvent::class, function (Faker\Generator $faker) {
+    $start = $faker->dateTimeThisMonth();
+    $end = $faker->dateTimeBetween($start, $start->format('Y-m-d H:i:s') . '+2 days');
+    return [
+        'name' => $faker->name,
+        'description' => $faker->paragraph,
+        'start' => $start,
+        'end' => $end,
+    ];
+});
+$factory->define(App\Race::class, function (Faker\Generator $faker) {
+    $start = $faker->dateTimeThisMonth();
+    $end = $faker->dateTimeBetween($start, $start->format('Y-m-d H:i:s') . '+2 hours');
+    return [
+      'name' => $faker->name,
+      'description' => $faker->paragraph,
+      'start' => $start,
+      'end' => $end,
+    ];
+});
