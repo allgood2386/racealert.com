@@ -39,3 +39,15 @@ $factory->define(App\Race::class, function (Faker\Generator $faker) {
       'end' => $end,
     ];
 });
+$factory->define(App\Track::class, function (Faker\Generator $faker) {
+    return [
+      'name' => $faker->name,
+      'description' => $faker->paragraph,
+    ];
+});
+$factory->define(App\TrackConfiguration::class, function (Faker\Generator $faker) {
+    return [
+      'name' => $faker->name,
+      'description' => $faker->paragraph,
+    ];
+});
