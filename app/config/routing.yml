@@ -1,0 +1,4 @@
+race_alert:
+    resource: "@RaceAlertBundle/Controller/"
+    type:     annotation
+    prefix:   /

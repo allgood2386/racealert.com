@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>TrackConfiguration list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Description</th>
+                <th>Length</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for trackConfiguration in trackConfigurations %}
+            <tr>
+                <td><a href="{{ path('trackconfiguration_show', { 'id': trackConfiguration.id }) }}">{{ trackConfiguration.id }}</a></td>
+                <td>{{ trackConfiguration.name }}</td>
+                <td>{{ trackConfiguration.description }}</td>
+                <td>{{ trackConfiguration.length }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('trackconfiguration_show', { 'id': trackConfiguration.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('trackconfiguration_edit', { 'id': trackConfiguration.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('trackconfiguration_new') }}">Create a new entry</a>
+        </li>
+    </ul>
+{% endblock %}

@@ -1,0 +1,4 @@
+services:
+#    race_alert.example:
+#        class: RaceAlertBundle\Example
+#        arguments: ["@service_id", "plain_value", %parameter%]
