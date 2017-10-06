@@ -2,27 +2,44 @@
 
 namespace App\Http\Controllers;
 
-use App\Race;
+use App\Http\Requests\CreateRaceRequest;
+use App\Http\Requests\UpdateRaceRequest;
+use App\Repositories\RaceRepository;
+use App\Http\Controllers\AppBaseController;
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
+use Flash;
+use Prettus\Repository\Criteria\RequestCriteria;
+use Response;
 
-class RaceController extends Controller
+class RaceController extends AppBaseController
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
+    /** @var  RaceRepository */
+    private $raceRepository;
+
+    public function __construct(RaceRepository $raceRepo)
     {
-        $races = Race::all();
-        return view('races.index', compact('races'));
+        $this->raceRepository = $raceRepo;
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Display a listing of the Race.
      *
-     * @return \Illuminate\Http\Response
+     * @param Request $request
+     * @return Response
+     */
+    public function index(Request $request)
+    {
+        $this->raceRepository->pushCriteria(new RequestCriteria($request));
+        $races = $this->raceRepository->all();
+
+        return view('races.index')
+            ->with('races', $races);
+    }
+
+    /**
+     * Show the form for creating a new Race.
+     *
+     * @return Response
      */
     public function create()
     {
@@ -30,86 +47,109 @@ class RaceController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Store a newly created Race in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param CreateRaceRequest $request
+     *
+     * @return Response
      */
-    public function store(Request $request)
+    public function store(CreateRaceRequest $request)
     {
-        $rules = [
-          'raceName' => 'required',
-          'raceDescription' => 'required',
-          'raceStart' => 'required',
-          'raceEnd' => 'required',
-        ];
+        $input = $request->all();
 
-        $request->validate($rules);
-        $race = new Race($request->input());
-        $race->saveOrFail();
+        $race = $this->raceRepository->create($input);
 
-        return redirect()->action('RaceController@index')->with('status', sprintf('You have created %s', $race->raceName));
+        Flash::success('Race saved successfully.');
+
+        return redirect(route('races.index'));
     }
 
     /**
-     * Display the specified resource.
+     * Display the specified Race.
      *
-     * @param  \App\Race  $race
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Race $race)
-    {
-        return view('races.show', compact('race'));
-    }
-
-    /**
-     * Show the form for editing the specified resource.
+     * @param  int $id
      *
-     * @param  \App\Race  $race
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
-    public function edit(Race $race)
+    public function show($id)
     {
-        return view('races.edit', compact('race'));
-    }
+        $race = $this->raceRepository->findWithoutFail($id);
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Race  $race
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Race $race)
-    {
-      $rules = [
-        'raceName' => 'required',
-        'raceDescription' => 'required',
-        'raceStart' => 'required',
-        'raceEnd' => 'required',
-      ];
+        if (empty($race)) {
+            Flash::error('Race not found');
 
-      $request->validate($rules);
-
-      foreach($race->fillable as $property) {
-        if ($value = $request->input($property)){
-          $race->$property = $value;
+            return redirect(route('races.index'));
         }
-      }
-      $race->saveOrFail();
 
-      return redirect()->action('RaceController@index')->with('status', sprintf('Race %s has been updated.', $race->id));
+        return view('races.show')->with('race', $race);
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Show the form for editing the specified Race.
      *
-     * @param  \App\Race  $race
-     * @return \Illuminate\Http\Response
+     * @param  int $id
+     *
+     * @return Response
      */
-    public function destroy(Race $race)
+    public function edit($id)
     {
-        $race->delete();
-        return redirect()->route('races.index')->with('status', sprintf('The Race %s was deleted.', $race->raceName));
+        $race = $this->raceRepository->findWithoutFail($id);
+
+        if (empty($race)) {
+            Flash::error('Race not found');
+
+            return redirect(route('races.index'));
+        }
+
+        return view('races.edit')->with('race', $race);
+    }
+
+    /**
+     * Update the specified Race in storage.
+     *
+     * @param  int              $id
+     * @param UpdateRaceRequest $request
+     *
+     * @return Response
+     */
+    public function update($id, UpdateRaceRequest $request)
+    {
+        $race = $this->raceRepository->findWithoutFail($id);
+
+        if (empty($race)) {
+            Flash::error('Race not found');
+
+            return redirect(route('races.index'));
+        }
+
+        $race = $this->raceRepository->update($request->all(), $id);
+
+        Flash::success('Race updated successfully.');
+
+        return redirect(route('races.index'));
+    }
+
+    /**
+     * Remove the specified Race from storage.
+     *
+     * @param  int $id
+     *
+     * @return Response
+     */
+    public function destroy($id)
+    {
+        $race = $this->raceRepository->findWithoutFail($id);
+
+        if (empty($race)) {
+            Flash::error('Race not found');
+
+            return redirect(route('races.index'));
+        }
+
+        $this->raceRepository->delete($id);
+
+        Flash::success('Race deleted successfully.');
+
+        return redirect(route('races.index'));
     }
 }

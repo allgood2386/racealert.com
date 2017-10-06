@@ -1,11 +1,11 @@
 <?php
 
-use Illuminate\Support\Facades\Schema;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
 
 class CreateRacesTable extends Migration
 {
+
     /**
      * Run the migrations.
      *
@@ -15,11 +15,11 @@ class CreateRacesTable extends Migration
     {
         Schema::create('races', function (Blueprint $table) {
             $table->increments('id');
+            $table->text('name');
+            $table->longtext('description');
+            $table->dateTimeTz('start');
             $table->timestamps();
-            $table->string('raceName');
-            $table->longText('raceDescription');
-            $table->dateTimeTz('raceStart');
-            $table->dateTimeTz('raceEnd');
+            $table->softDeletes();
         });
     }
 
@@ -30,6 +30,6 @@ class CreateRacesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('races');
+        Schema::drop('races');
     }
 }

@@ -1,13 +1,23 @@
 @extends('layouts.app')
-@section('title', 'Races')
+
 @section('content')
-<ul class="nav navbar-nav">
-    <li><a href="{{ action('RaceController@create') }}">Create a Race</a>
-</ul>
-@foreach($races as $race)
-    <div><a href="{{ route('races.show', $race->id) }}">{{ $race->raceName }}</a></div>
-    <div> {{$race->raceDescription}}</div>
-    <div> {{$race->raceStart}}</div>
-    <div> {{$race->raceEnd}}</div>
-@endforeach
+    <section class="content-header">
+        <h1 class="pull-left">Races</h1>
+        <h1 class="pull-right">
+           <a class="btn btn-primary pull-right" style="margin-top: -10px;margin-bottom: 5px" href="{!! route('races.create') !!}">Add New</a>
+        </h1>
+    </section>
+    <div class="content">
+        <div class="clearfix"></div>
+
+        @include('flash::message')
+
+        <div class="clearfix"></div>
+        <div class="box box-primary">
+            <div class="box-body">
+                    @include('races.table')
+            </div>
+        </div>
+    </div>
 @endsection
+
