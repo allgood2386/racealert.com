@@ -6,6 +6,7 @@ use App\Http\Requests\CreateRaceRequest;
 use App\Http\Requests\UpdateRaceRequest;
 use App\Repositories\RaceRepository;
 use App\Http\Controllers\AppBaseController;
+use App\Models\Track;
 use Illuminate\Http\Request;
 use Flash;
 use Prettus\Repository\Criteria\RequestCriteria;
@@ -100,8 +101,8 @@ class RaceController extends AppBaseController
 
             return redirect(route('races.index'));
         }
-
-        return view('races.edit')->with('race', $race);
+        $tracks = Track::pluck('name', 'id');
+        return view('races.edit', compact('tracks'))->with('race', $race);
     }
 
     /**

@@ -32,7 +32,12 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  *          description="updated_at",
  *          type="string",
  *          format="date-time"
- *      )
+ *      ),
+ *      @SWG\Property(
+ *          property="track_id",
+ *          description="track_id",
+ *          type="integer",
+ *      ),
  * )
  */
 class Race extends Model
@@ -48,7 +53,8 @@ class Race extends Model
     public $fillable = [
         'name',
         'description',
-        'start'
+        'start',
+        'track_id'
     ];
 
     /**
@@ -68,6 +74,10 @@ class Race extends Model
     public static $rules = [
         'start' => 'required'
     ];
+
+    public function track() {
+      return $this->belongsTo(Track::class);
+    }
 
     
 }

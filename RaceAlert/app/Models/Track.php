@@ -49,7 +49,7 @@ class Track extends Model
         'description'
     ];
 
-    /**
+  /**
      * The attributes that should be casted to native types.
      *
      * @var array
@@ -58,7 +58,7 @@ class Track extends Model
         'name' => 'string'
     ];
 
-    /**
+  /**
      * Validation rules
      *
      * @var array
@@ -68,5 +68,13 @@ class Track extends Model
         'description' => 'required'
     ];
 
-    
+  /**
+   * Relationship.
+   *
+   * @return mixed
+   */
+    public function races() {
+      return $this->hasMany(Race::class);
+    }
+
 }

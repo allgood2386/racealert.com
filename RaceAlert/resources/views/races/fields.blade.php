@@ -16,6 +16,12 @@
     {!! Form::date('start', null, ['class' => 'form-control']) !!}
 </div>
 
+<!-- Track Field -->
+<div class="form-group col-sm-6">
+    {!! Form::label('track_id', 'Track:') !!}
+    {!! Form::select('track_id', $tracks, ['class' => 'form-control']) !!}
+</div>
+
 <!-- Submit Field -->
 <div class="form-group col-sm-12">
     {!! Form::submit('Save', ['class' => 'btn btn-primary']) !!}

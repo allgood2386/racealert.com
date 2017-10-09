@@ -19,6 +19,7 @@ class CreateTracksTable extends Migration
             $table->longtext('description');
             $table->timestamps();
             $table->softDeletes();
+
         });
     }
 
