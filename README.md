@@ -7,9 +7,9 @@ and run:
 
 ```$ docker-compose exec php-fpm php artisan migrate --seed```
 
-Navigate to http://localhost:8888/
+Navigate to http://localhost:8888/home
 
-Mailhog is available on http://localhost:8889/
+Mailhog is available on http://localhost:8889/home
 
 For logs run:
 ```docker-compose logs -f``` or
