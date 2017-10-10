@@ -54,7 +54,6 @@ class Race extends Model
         'name',
         'description',
         'start',
-        'track_id',
         'track_configuration_id'
     ];
 
@@ -64,7 +63,7 @@ class Race extends Model
      * @var array
      */
     protected $casts = [
-        'start' => 'date'
+        'start' => 'datetime'
     ];
 
     /**
@@ -73,6 +72,8 @@ class Race extends Model
      * @var array
      */
     public static $rules = [
+        'name' => 'required',
+        'description' => 'required',
         'start' => 'required'
     ];
 
@@ -81,10 +82,6 @@ class Race extends Model
    *
    * @return mixed
    */
-    public function track() {
-      return $this->belongsTo(Track::class);
-    }
-
     public function trackConfiguration() {
       return $this->belongsTo(TrackConfiguration::class);
     }
