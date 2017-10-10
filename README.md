@@ -1,6 +1,10 @@
 ### Getting Started
 
-If you are using docker-compose copy .env.container.example to the RaceAlert directory
+If you are using docker-compose copy .env.container.example to the RaceAlert directory:
+```
+$ cd /path/to/project
+$ cp .env.container.example ./RaceAlert
+```
 and run:
 
 ```$ docker-compose up -d```
