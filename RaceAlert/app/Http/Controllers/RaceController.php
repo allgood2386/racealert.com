@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\CreateRaceRequest;
 use App\Http\Requests\UpdateRaceRequest;
+use App\Models\TrackConfiguration;
 use App\Repositories\RaceRepository;
 use App\Http\Controllers\AppBaseController;
 use App\Models\Track;
@@ -44,7 +45,9 @@ class RaceController extends AppBaseController
      */
     public function create()
     {
-        return view('races.create');
+        $tracks = Track::pluck('name', 'id');
+        $configurations = TrackConfiguration::pluck('name', 'id');
+        return view('races.create', compact(['tracks', 'configurations']));
     }
 
     /**
@@ -102,7 +105,8 @@ class RaceController extends AppBaseController
             return redirect(route('races.index'));
         }
         $tracks = Track::pluck('name', 'id');
-        return view('races.edit', compact('tracks'))->with('race', $race);
+        $configurations = TrackConfiguration::pluck('name', 'id');
+        return view('races.edit', compact(['tracks', 'configurations']))->with('race', $race);
     }
 
     /**

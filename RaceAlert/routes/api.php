@@ -21,3 +21,5 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::resource('races', 'RaceAPIController');
 
 Route::resource('tracks', 'TrackAPIController');
+
+Route::resource('track_configurations', 'TrackConfigurationAPIController');

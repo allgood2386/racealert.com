@@ -10,26 +10,20 @@
     {!! Form::textarea('description', null, ['class' => 'form-control']) !!}
 </div>
 
-<!-- Start Field -->
+<!-- Length Field -->
 <div class="form-group col-sm-6">
-    {!! Form::label('start', 'Start:') !!}
-    {!! Form::date('start', null, ['class' => 'form-control']) !!}
+    {!! Form::label('length', 'Length:') !!}
+    {!! Form::text('length', null, ['class' => 'form-control']) !!}
 </div>
 
-<!-- Track Field -->
+<!-- Configurations Field -->
 <div class="form-group col-sm-6">
     {!! Form::label('track_id', 'Track:') !!}
-    {!! Form::select('track_id', $tracks, $race->track->id, ['class' => 'form-control']) !!}
-</div>
-
-<!-- TrackConfiguration Field -->
-<div class="form-group col-sm-6">
-    {!! Form::label('track_configuration_id', 'Track Configuration:') !!}
-    {!! Form::select('track_configuration_id', $configurations, $race->trackConfiguration->id, ['class' => 'form-control']) !!}
+    {!! Form::select('track_id', $tracks, ['class' => 'form-control']) !!}
 </div>
 
 <!-- Submit Field -->
 <div class="form-group col-sm-12">
     {!! Form::submit('Save', ['class' => 'btn btn-primary']) !!}
-    <a href="{!! route('races.index') !!}" class="btn btn-default">Cancel</a>
+    <a href="{!! route('trackConfigurations.index') !!}" class="btn btn-default">Cancel</a>
 </div>

@@ -77,4 +77,13 @@ class Track extends Model
       return $this->hasMany(Race::class);
     }
 
+  /**
+   * Relationship.
+   *
+   * @return mixed
+   */
+    public function configurations() {
+      return $this->hasMany(TrackConfiguration::class);
+    }
+
 }

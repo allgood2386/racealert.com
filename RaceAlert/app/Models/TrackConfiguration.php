@@ -7,8 +7,8 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
  * @SWG\Definition(
- *      definition="Race",
- *      required={"start"},
+ *      definition="TrackConfiguration",
+ *      required={"name", "description", "length"},
  *      @SWG\Property(
  *          property="id",
  *          description="id",
@@ -16,10 +16,15 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  *          format="int32"
  *      ),
  *      @SWG\Property(
- *          property="start",
- *          description="start",
- *          type="string",
- *          format="date"
+ *          property="name",
+ *          description="name",
+ *          type="string"
+ *      ),
+ *      @SWG\Property(
+ *          property="length",
+ *          description="length",
+ *          type="number",
+ *          format="float"
  *      ),
  *      @SWG\Property(
  *          property="created_at",
@@ -32,19 +37,14 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  *          description="updated_at",
  *          type="string",
  *          format="date-time"
- *      ),
- *      @SWG\Property(
- *          property="track_id",
- *          description="track_id",
- *          type="integer",
- *      ),
+ *      )
  * )
  */
-class Race extends Model
+class TrackConfiguration extends Model
 {
     use SoftDeletes;
 
-    public $table = 'races';
+    public $table = 'track_configurations';
     
 
     protected $dates = ['deleted_at'];
@@ -53,9 +53,8 @@ class Race extends Model
     public $fillable = [
         'name',
         'description',
-        'start',
-        'track_id',
-        'track_configuration_id'
+        'length',
+        'track_id'
     ];
 
     /**
@@ -64,7 +63,7 @@ class Race extends Model
      * @var array
      */
     protected $casts = [
-        'start' => 'date'
+        'name' => 'string'
     ];
 
     /**
@@ -73,7 +72,9 @@ class Race extends Model
      * @var array
      */
     public static $rules = [
-        'start' => 'required'
+        'name' => 'required',
+        'description' => 'required',
+        'length' => 'required'
     ];
 
   /**
@@ -82,11 +83,7 @@ class Race extends Model
    * @return mixed
    */
     public function track() {
-      return $this->belongsTo(Track::class);
-    }
-
-    public function trackConfiguration() {
-      return $this->belongsTo(TrackConfiguration::class);
+      $this->belongsTo(Track::class);
     }
 
     

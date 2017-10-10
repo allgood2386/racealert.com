@@ -6,6 +6,7 @@ use App\Http\Requests\CreateTrackRequest;
 use App\Http\Requests\UpdateTrackRequest;
 use App\Repositories\TrackRepository;
 use App\Http\Controllers\AppBaseController;
+use App\Models\TrackConfiguration;
 use Illuminate\Http\Request;
 use Flash;
 use Prettus\Repository\Criteria\RequestCriteria;

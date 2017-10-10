@@ -25,3 +25,5 @@ Route::resource('races', 'RaceController');
 Route::resource('races', 'RaceController');
 
 Route::resource('tracks', 'TrackController');
+
+Route::resource('trackConfigurations', 'TrackConfigurationController');

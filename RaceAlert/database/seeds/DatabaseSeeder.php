@@ -11,6 +11,8 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // $this->call(UsersTableSeeder::class);
+      $trackConfigurations = factory(\App\Models\TrackConfiguration::class, 9)->create();
+      $tracks = factory(\App\Models\Track::class, 3)->create();
+      $races = factory(\App\Models\Race::class, 3)->create();
     }
 }
