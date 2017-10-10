@@ -13,22 +13,25 @@
 <!-- Start Field -->
 <div class="form-group col-sm-6">
     {!! Form::label('start', 'Start:') !!}
-    {!! Form::date('start', null, ['class' => 'form-control']) !!}
-</div>
-
-<!-- Track Field -->
-<div class="form-group col-sm-6">
-    {!! Form::label('track_id', 'Track:') !!}
-    {!! Form::select('track_id', $tracks, $race->track->id, ['class' => 'form-control']) !!}
+    {!! Form::datetime('start', null, ['class' => 'form-control', 'placeholder' => \Carbon\Carbon::now()->toDateTimeString()]) !!}
 </div>
 
 <!-- TrackConfiguration Field -->
-<div class="form-group col-sm-6">
-    {!! Form::label('track_configuration_id', 'Track Configuration:') !!}
-    {!! Form::select('track_configuration_id', $configurations, $race->trackConfiguration->id, ['class' => 'form-control']) !!}
-</div>
+@isset($race)
+    <div class="form-group col-sm-6">
+        {!! Form::label('track_configuration_id', 'Track Configuration:') !!}
+        {!! Form::select('track_configuration_id', $configurations, $race->trackConfiguration->id, ['class' => 'form-control']) !!}
+    </div>
+@else
+    <div class="form-group col-sm-6">
+        {!! Form::label('track_configuration_id', 'Track Configuration:') !!}
+        {!! Form::select('track_configuration_id', $configurations, ['class' => 'form-control']) !!}
+    </div>
+@endisset
 
-<!-- Submit Field -->
+
+
+    <!-- Submit Field -->
 <div class="form-group col-sm-12">
     {!! Form::submit('Save', ['class' => 'btn btn-primary']) !!}
     <a href="{!! route('races.index') !!}" class="btn btn-default">Cancel</a>
