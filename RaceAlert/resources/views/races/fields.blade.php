@@ -25,7 +25,7 @@
 @else
     <div class="form-group col-sm-6">
         {!! Form::label('track_configuration_id', 'Track Configuration:') !!}
-        {!! Form::select('track_configuration_id', $configurations, ['class' => 'form-control']) !!}
+        {!! Form::select('track_configuration_id', $configurations, null, ['class' => 'form-control']) !!}
     </div>
 @endisset
 

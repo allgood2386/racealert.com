@@ -45,7 +45,6 @@ class RaceController extends AppBaseController
      */
     public function create()
     {
-        $tracks = Track::pluck('name', 'id');
         $configurations = TrackConfiguration::pluck('name', 'id');
         return view('races.create', compact(['tracks', 'configurations']));
     }
@@ -104,9 +103,10 @@ class RaceController extends AppBaseController
 
             return redirect(route('races.index'));
         }
-        $tracks = Track::pluck('name', 'id');
         $configurations = TrackConfiguration::pluck('name', 'id');
-        return view('races.edit', compact(['tracks', 'configurations']))->with('race', $race);
+        return view('races.edit')
+          ->with('race', $race)
+          ->with('configurations', $configurations);
     }
 
     /**
