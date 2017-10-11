@@ -21,6 +21,7 @@ class RaceController extends AppBaseController
     public function __construct(RaceRepository $raceRepo)
     {
         $this->raceRepository = $raceRepo;
+        $this->middleware('auth')->except(['index','show']);
     }
 
     /**

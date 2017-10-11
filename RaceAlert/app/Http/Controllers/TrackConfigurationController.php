@@ -20,6 +20,7 @@ class TrackConfigurationController extends AppBaseController
     public function __construct(TrackConfigurationRepository $trackConfigurationRepo)
     {
         $this->trackConfigurationRepository = $trackConfigurationRepo;
+        $this->middleware('auth')->except(['index','show']);
     }
 
     /**

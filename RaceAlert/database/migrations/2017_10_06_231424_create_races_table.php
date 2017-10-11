@@ -17,7 +17,7 @@ class CreateRacesTable extends Migration
             $table->increments('id');
             $table->text('name');
             $table->longtext('description');
-            $table->dateTimeTz('start');
+            $table->dateTime('start');
             $table->integer('track_id');
             $table->timestamps();
             $table->softDeletes();

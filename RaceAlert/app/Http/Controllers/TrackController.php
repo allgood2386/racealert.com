@@ -20,6 +20,7 @@ class TrackController extends AppBaseController
     public function __construct(TrackRepository $trackRepo)
     {
         $this->trackRepository = $trackRepo;
+        $this->middleware('auth')->except(['index','show']);
     }
 
     /**
