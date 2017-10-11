@@ -83,7 +83,7 @@ class TrackConfiguration extends Model
    * @return mixed
    */
     public function track() {
-      $this->belongsTo(Track::class);
+      return $this->belongsTo(Track::class);
     }
 
     

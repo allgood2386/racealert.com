@@ -17,10 +17,17 @@
 </div>
 
 <!-- Configurations Field -->
-<div class="form-group col-sm-6">
-    {!! Form::label('track_id', 'Track:') !!}
-    {!! Form::select('track_id', $tracks, ['class' => 'form-control']) !!}
-</div>
+@isset($trackConfiguration->track->id)
+    <div class="form-group col-sm-6">
+        {!! Form::label('track_id', 'Track:') !!}
+        {!! Form::select('track_id', $tracks, $trackConfiguration->track->id, ['class' => 'form-control']) !!}
+    </div>
+@else
+    <div class="form-group col-sm-6">
+        {!! Form::label('track_id', 'Track:') !!}
+        {!! Form::select('track_id', $tracks, null, ['class' => 'form-control']) !!}
+    </div>
+@endisset
 
 <!-- Submit Field -->
 <div class="form-group col-sm-12">
